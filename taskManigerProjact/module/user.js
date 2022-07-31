@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
     password: { type: String },
     token:{ type: String ,default:""},
     roll:{ type: Number ,default:0}
-}
+},
+{ timestamps: true }
 );
 
 module.exports = mongoose.model("User", UserSchema)

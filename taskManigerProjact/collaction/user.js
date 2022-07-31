@@ -57,7 +57,7 @@ const profile = async (req,res) => {
         if(user){
             res.json(user)
         }else{
-//regrnamte token 
+        //regrnamte token 
         }
     } catch (err) {
         res.status(404).json({error:"user login first"})
