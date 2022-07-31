@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const { config } = require('./config/congif');
-const {} = require('./config/congif')
 const app = express()
+
 
 
 /**************database connaction ************ */
@@ -16,17 +16,17 @@ mongoose.connect(config.db)
     })
 
 
+/********************all router require*********** */
+
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
+const allRouter = require("./router/user")
 
 
 
 
 
-
-
-
-
+app.use('/api',allRouter)
 
 
 
