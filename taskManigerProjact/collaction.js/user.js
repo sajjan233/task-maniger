@@ -12,7 +12,7 @@ const register = async (req, res) => {
             user.password = undefined;
             return res.json(user)
         } else if (user && userRegisted) {
-            return res.status(201).json({ massage: "user registed" });
+            return res.status(201).json({ massage: "user allready registed" });
         }
         else {
             return res.status(204).json({ massage: " Enter user data" });
@@ -57,7 +57,7 @@ const profile = async (req,res) => {
         if(user){
             res.json(user)
         }else{
-//regrnamte token
+//regrnamte token 
         }
     } catch (err) {
         res.status(404).json({error:"user login first"})
