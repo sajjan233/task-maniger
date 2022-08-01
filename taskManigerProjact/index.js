@@ -20,7 +20,7 @@ mongoose.connect(config.db)
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
-const allRouter = require("./router/user")
+const allRouter = require("./router")
 
 
 

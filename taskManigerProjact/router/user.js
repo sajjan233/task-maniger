@@ -5,8 +5,8 @@ const {userRequire} = require('../auth/midelweare')
 
 
 
-router.post('/user',register);
-router.post('/user/login',login);
-router.get('/user/profile',userRequire,profile)
+router.post('/register',register);
+router.post('/login',login);
+router.get('/profile',userRequire,profile)
 
 module.exports = router;

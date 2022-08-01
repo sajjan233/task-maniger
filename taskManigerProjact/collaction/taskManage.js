@@ -1,14 +1,16 @@
 const Task = require('../module/taskManage')
-const User = require()
+const User = require('../module/user')
 const create = async (req, res) => {
     try {
 
         const { task } = req.body;
-        const userId = await User.findOne({ token: req.header["x-api-key"], task: task }, { _id: 1 })
-        if (userId.task) {
+        console.log(task);
+        const userId = await User.findOne({ token: req.headers["x-api-key"]}, { _id: 1 })
+        console.log(userId);
+        if (!task) {
             return res.status(202).json({ massage: "Enter Your data" })
         }
-        else if (!userId.task) {
+        else if (task) {
             const result = await Task.create({ task: task, userId: userId._id });
             result.userId = undefined;
             return res.json({
@@ -42,10 +44,17 @@ const readTask = async (req, res) => {
 }
 
 const updater = async (req,res) => {
-    
+    try {
+        let {search,task} =  req.body;
+        const taskUpDate = await Task.updateOne({task:search},{task:task});
+        console.log(taskUpDate);
+    } catch (err) {
+        
+    }
 }
 
 module.exports = {
     create,
-    readTask
+    readTask,
+    updater
 }
