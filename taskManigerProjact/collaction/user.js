@@ -26,7 +26,7 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const result = User.findOne({ email: email, password: password })
-        // console.log("result",result);
+        console.log("result",result);
         if (result) {
             /*********create token */
 
@@ -37,15 +37,16 @@ const login = async (req, res) => {
                 roll: result.roll,
                 date: { default: Date.now }
             }, config.privateKey, { expiresIn: '24h' })
-
-            await User.findOneAndUpdate({ email: email }, { $set: { token: token,password:hasPass }}, { new: true })
+console.log(token);
+           let v =  await User.findOneAndUpdate({ email: email }, { $set: { token: token,password:hasPass }}, {  new: true, upsert: true,rawResult: true})
+           console.log("v",v);
             return res.json({
                 massage: "user login successfully",
                 token: token
             })
         }
     } catch (err) {
-        res.status(404).json({ error: "something else", err })
+        res.status(402).json({ error: "something else"})
         console.log(err);
     }
 }
