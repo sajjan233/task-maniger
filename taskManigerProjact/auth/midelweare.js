@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { expressjwt } = require('express-jwt');
 const User = require('../module/user')
+require('dotenv').config()
 const { config } = require('../config/congif')
 const userRequire = async (req, res, next) => {
 
