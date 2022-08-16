@@ -1,13 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
-const { config } = require('./config/congif');
+require('dotenv').config()
 const app = express()
-
+const conaction = process.env || DEV;
 
 
 /**************database connaction ************ */
-mongoose.connect(config.db)
+mongoose.connect(conaction.DB)
     .then(() => {
     console.log("database connaction");
     })
@@ -32,6 +32,6 @@ app.use('/api',allRouter)
 
 
 
-app.listen(config.port,() => {
-    console.log("srver run port on ",config.port);
+app.listen(conaction.PORT,() => {
+    console.log("srver run");
 })

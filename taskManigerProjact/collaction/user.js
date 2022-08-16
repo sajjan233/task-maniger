@@ -1,7 +1,8 @@
 const User = require('../module/user');
-const { config } = require('../config/congif')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+
+const conaction = process.env || DEV
 const register = async (req, res) => {
     try {
         const user = new User(req.body)
@@ -36,7 +37,7 @@ const login = async (req, res) => {
                 id: result._id,
                 roll: result.roll,
                 date: { default: Date.now }
-            }, config.privateKey, { expiresIn: '24h' })
+            }, conaction.privateKey, { expiresIn: '24h' })
 console.log(token);
            let v =  await User.findOneAndUpdate({ email: email }, { $set: { token: token,password:hasPass }}, {  new: true, upsert: true,rawResult: true})
            console.log("v",v);

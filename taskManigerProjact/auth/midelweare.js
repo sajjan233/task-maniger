@@ -2,7 +2,8 @@ const bcrypt = require('bcryptjs');
 const { expressjwt } = require('express-jwt');
 const User = require('../module/user')
 require('dotenv').config()
-const { config } = require('../config/congif')
+
+const conaction = process.env || DEV;
 const userRequire = async (req, res, next) => {
 
     try {
@@ -22,7 +23,7 @@ const varify = async (req, res, next) => {
     try {
 
         expressjwt({
-            secret: config.privateKey,
+            secret: conaction.privateKey,
             algorithms: ["HS256"],
             credentialsRequired: false,
             getToken: fromHeaderOrQuerystring = (req) => {
@@ -45,10 +46,22 @@ const varify = async (req, res, next) => {
 }
 
 
-
-
+const hash = (data) => {
+try {
+    bcrypt.genSalt(data.salt, (err, salt)=> {
+        bcrypt.hash(data.myPlaintextPassword, salt, (err, password) => {
+         if (err) console.error(err);
+         console.log(password);
+        });
+        return salt , password
+    });
+} catch (err) {
+    console.log(err);
+    throw err;
+}
+}
 
 module.exports = {
     userRequire,
-    varify
+    varify,hash
 }

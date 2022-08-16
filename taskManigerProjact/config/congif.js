@@ -1,5 +1,5 @@
-module.exports.config ={
-    port:1050,
+let DEV ={
+    port:2000,
     host:"localhost",
     db:"mongodb://localhost:27017/taskmainger",
     privateKey :"this is a private kry",
@@ -17,3 +17,4 @@ module.exports.config ={
 //     privateKey :"this is a private kry",
 //     hashKey:"sdfdsfdsfdferffrdfKey"
 // }
+module.exports = {DEV}
